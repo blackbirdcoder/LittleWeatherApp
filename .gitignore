@@ -1,6 +1,8 @@
+.cache/
 .vscode/
 .history/
 .clangd
 *.coverage
 *.coveragexml
 main
+compile_commands.json
