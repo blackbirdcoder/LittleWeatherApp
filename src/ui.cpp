@@ -1,10 +1,19 @@
 #include "ui.h"
 #include <raylib.h>
 
-UI::UI(const char *cities) {
-  stateDropdownMenu["item"] = 0;
-  stateDropdownMenu["show"] = 1;
-  this->cities = cities;
+namespace WeatherApp {
+
+UI::UI(const City cities[], const unsigned short numberCities) {
+  dropdownMenuState["item"] = 0;
+  dropdownMenuState["show"] = 1;
+
+  for (int i = 0; i < numberCities; ++i) {
+    if (i < numberCities - 1) {
+      dropdownMenuItems += cities[i].name + ";";
+    } else {
+      dropdownMenuItems += cities[i].name;
+    }
+  }
 }
 
 void UI::DropdownMenu(const int screenWidth) {
@@ -16,14 +25,15 @@ void UI::DropdownMenu(const int screenWidth) {
       30.0f,
   };
 
-  if (stateDropdownMenu["show"]) {
+  if (dropdownMenuState["show"]) {
     GuiLock();
   }
-  if (GuiDropdownBox(pos, cities, &stateDropdownMenu["item"],
-                     (bool)stateDropdownMenu["show"])) {
-    stateDropdownMenu["show"] = !stateDropdownMenu["show"];
+  if (GuiDropdownBox(pos, dropdownMenuItems.c_str(), &dropdownMenuState["item"],
+                     (bool)dropdownMenuState["show"])) {
+    dropdownMenuState["show"] = !dropdownMenuState["show"];
   }
   GuiUnlock();
 }
 
-int UI::GetActiveItemDropdownMenu() { return stateDropdownMenu["item"]; }
+int UI::GetActiveItemDropdownMenu() { return dropdownMenuState["item"]; }
+} // namespace WeatherApp

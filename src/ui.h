@@ -2,15 +2,19 @@
 // clang-format off
 #include <raygui.h>
 #include <map>
+#include <string>
+#include "settings.h"
 // clang-format on
 
+namespace WeatherApp {
 class UI {
 public:
-  UI(const char *cities);
+  UI(const City cities[], const unsigned short numberCities);
   void DropdownMenu(const int screenWidthSize);
   int GetActiveItemDropdownMenu();
 
 private:
-  std::map<const char *, int> stateDropdownMenu;
-  const char *cities;
+  std::map<const char *, int> dropdownMenuState;
+  std::string dropdownMenuItems;
 };
+} // namespace WeatherApp
