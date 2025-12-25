@@ -11,6 +11,7 @@ int main(void) {
   InitWindow(W_WIDTH, W_HEIGHT, TITLE);
   SetTargetFPS(FPS);
   GuiLoadStyle("theme/style_cyber.rgs");
+  GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, palette.light);
   Wallpaper wallpaper("assets/forest_default.jpg");
   wallpaper.Set(W_WIDTH, W_HEIGHT);
   UI ui(CITIES);
