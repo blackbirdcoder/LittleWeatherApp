@@ -5,8 +5,8 @@
 namespace Weather {
 
 namespace Window {
-extern const int W_WIDTH;
-extern const int W_HEIGHT;
+extern const int WIDTH;
+extern const int HEIGHT;
 extern const char *TITLE;
 extern const int FPS;
 } // namespace Window
