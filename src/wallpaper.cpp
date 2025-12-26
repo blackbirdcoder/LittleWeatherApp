@@ -1,6 +1,8 @@
 #include "wallpaper.h"
 #include <raylib.h>
 
+namespace Weather {
+
 Wallpaper::Wallpaper(const char *fileName) { this->fileName = fileName; }
 
 void Wallpaper::Set(int w_width, int w_height) {
@@ -10,3 +12,4 @@ void Wallpaper::Set(int w_width, int w_height) {
 }
 
 void Wallpaper::Draw() { DrawTexture(image, 0, 0, WHITE); }
+} // namespace WeatherApp

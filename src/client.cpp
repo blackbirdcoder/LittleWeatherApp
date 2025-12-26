@@ -1,17 +1,17 @@
 #include "client.h"
 #include "settings.h"
+#include <iostream>
 #include <sstream>
 #include <string>
 
-namespace WeatherApp {
-Client::Client(const char *host) {
-  this->host = host;
-};
+namespace Weather {
+
+Client::Client(const char *host) { this->host = host; };
 
 int Client::Request(const std::map<Token, std::string> path,
-  const City cities[], int menuCurrentItem) {
+                    const City cities[], int menuCurrentItem) {
   httplib::Client cli(host);
-  
+
   std::stringstream strBuild;
   strBuild << path.at(PART_ONE) << cities[menuCurrentItem].latitude
            << path.at(PART_TWO) << cities[menuCurrentItem].longitude

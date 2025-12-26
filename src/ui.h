@@ -6,7 +6,7 @@
 #include "settings.h"
 // clang-format on
 
-namespace WeatherApp {
+namespace Weather {
 class UI {
 public:
   UI(const City cities[], const unsigned short numberCities);

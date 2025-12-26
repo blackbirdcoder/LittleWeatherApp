@@ -1,7 +1,7 @@
 #include "ui.h"
 #include <raylib.h>
 
-namespace WeatherApp {
+namespace Weather {
 
 UI::UI(const City cities[], const unsigned short numberCities) {
   dropdownMenuState["item"] = 0;

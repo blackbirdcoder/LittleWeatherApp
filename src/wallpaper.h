@@ -1,6 +1,8 @@
 #pragma once
 #include <raylib.h>
 
+namespace Weather {
+
 class Wallpaper {
 public:
   Wallpaper(const char *fileName);
@@ -11,3 +13,4 @@ private:
   const char *fileName;
   Texture2D image;
 };
+} // namespace WeatherApp

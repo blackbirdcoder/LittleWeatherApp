@@ -4,7 +4,7 @@
 #include <map>
 #include <string>
 
-namespace WeatherApp {
+namespace Weather {
 class Client {
 public:
   Client(const char *host);

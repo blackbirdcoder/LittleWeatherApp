@@ -10,26 +10,27 @@
 // clang-format on
 
 int main(void) {
-  InitWindow(W_WIDTH, W_HEIGHT, TITLE);
-  SetTargetFPS(FPS);
+  InitWindow(Weather::Window::W_WIDTH, Weather::Window::W_HEIGHT,
+             Weather::Window::TITLE);
+  SetTargetFPS(Weather::Window::FPS);
   GuiLoadStyle("theme/style_cyber.rgs");
-  GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, palette.light);
-  Wallpaper wallpaper("assets/forest_default.jpg");
-  wallpaper.Set(W_WIDTH, W_HEIGHT);
-  WeatherApp::UI ui(CITIES, NUMBER_CITIES);
+  GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, Weather::palette.light);
+  Weather::Wallpaper wallpaper("assets/forest_default.jpg");
+  wallpaper.Set(Weather::Window::W_WIDTH, Weather::Window::W_HEIGHT);
+  Weather::UI ui(Weather::CITIES, Weather::NUMBER_CITIES);
   int activeItem = ui.GetActiveItemDropdownMenu();
-  WeatherApp::Client client(HOST);
-  client.Request(REQUEST_PATH, CITIES, activeItem);
+  Weather::Client client(Weather::HOST);
+  client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
 
   while (!WindowShouldClose()) {
     BeginDrawing();
-    ClearBackground(GetColor(palette.dark));
+    ClearBackground(GetColor(Weather::palette.dark));
     wallpaper.Draw();
     //--- GIU
-    ui.DropdownMenu(W_WIDTH);
+    ui.DropdownMenu(Weather::Window::W_WIDTH);
     if (activeItem != ui.GetActiveItemDropdownMenu()) {
       activeItem = ui.GetActiveItemDropdownMenu();
-      client.Request(REQUEST_PATH, CITIES, activeItem);
+      client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
     }
     //---
     EndDrawing();

@@ -1,11 +1,16 @@
 #pragma once
-#include <string>
 #include <map>
+#include <string>
 
+namespace Weather {
+
+namespace Window {
 extern const int W_WIDTH;
 extern const int W_HEIGHT;
 extern const char *TITLE;
 extern const int FPS;
+} // namespace Window
+
 extern const unsigned short NUMBER_CITIES;
 
 struct Palette {
@@ -25,9 +30,10 @@ struct City {
 };
 
 enum Cities { KHARKOV, KYIV };
-enum Token {PART_ONE, PART_TWO, PART_THREE};
+enum Token { PART_ONE, PART_TWO, PART_THREE };
 
 extern const City CITIES[];
 
-extern const char* HOST;
+extern const char *HOST;
 extern const std::map<Token, std::string> REQUEST_PATH;
+} // namespace Weather
