@@ -5,8 +5,11 @@
 #define RAYGUI_IMPLEMENTATION
 #include "ui.h"
 #include "httplib.h"
-#include <iostream>
 #include "client.h"
+//temporarily
+#include <iostream>
+#include <map>
+//---
 // clang-format on
 
 int main(void) {
@@ -17,10 +20,19 @@ int main(void) {
   GuiSetStyle(DEFAULT, TEXT_COLOR_NORMAL, Weather::palette.light);
   Weather::Wallpaper wallpaper("assets/forest_default.jpg");
   wallpaper.Set(Weather::Window::WIDTH, Weather::Window::HEIGHT);
-  Weather::UI ui(Weather::CITIES, Weather::NUMBER_CITIES);
+  Weather::UI ui(Weather::CITIES, Weather::NUMBER_CITIES, "assets/atlas.png",
+                 "assets/Roboto_Bold.ttf", "assets/Roboto_Regular.ttf",
+                 "assets/Roboto_Big.ttf", "assets/celsius.png");
   int activeItem = ui.GetActiveItemDropdownMenu();
   Weather::Client client(Weather::HOST);
   client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
+
+  std::map<std::string, std::string> d = {
+      {"pic", "day_heavy_snow"},
+      {"weather", "Heavy Snow"},
+      {"city", "Kharkiv City"},
+      {"temp", "-2"},
+  };
 
   while (!WindowShouldClose()) {
     BeginDrawing();
@@ -32,6 +44,7 @@ int main(void) {
       activeItem = ui.GetActiveItemDropdownMenu();
       client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
     }
+    ui.WeatherHeroCard(d);
     //---
     EndDrawing();
   }
