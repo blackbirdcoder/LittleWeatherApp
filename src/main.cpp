@@ -9,6 +9,7 @@
 //temporarily
 #include <iostream>
 #include <map>
+#include <list>
 //---
 // clang-format on
 
@@ -27,11 +28,19 @@ int main(void) {
   Weather::Client client(Weather::HOST);
   client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
 
-  std::map<std::string, std::string> d = {
-      {"pic", "day_heavy_snow"},
-      {"weather", "Heavy Snow"},
+  std::map<std::string, std::string> dataHeroCard = {
+      {"pic", "day_snow"},
+      {"weather", "Snow"},
       {"city", "Kharkiv City"},
-      {"temp", "-2"},
+      {"temp", "-1"},
+  };
+
+  std::list<std::map<std::string, std::string>> dataHourlyCard = {
+      {{"time", "3PM"}, {"temp", "-1"}},
+      {{"time", "4PM"}, {"temp", "-1"}},
+      {{"time", "5PM"}, {"temp", "-3"}},
+      {{"time", "6PM"}, {"temp", "-5"}},
+      {{"time", "7PM"}, {"temp", "-7"}},
   };
 
   while (!WindowShouldClose()) {
@@ -44,7 +53,8 @@ int main(void) {
       activeItem = ui.GetActiveItemDropdownMenu();
       client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
     }
-    ui.WeatherHeroCard(d);
+    ui.WeatherHeroCard(dataHeroCard);
+    ui.WeatherHourlyCard(dataHourlyCard);
     //---
     EndDrawing();
   }

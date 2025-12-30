@@ -6,6 +6,7 @@
 #include <string>
 #include "settings.h"
 #include "atlas.h"
+#include <list>
 // clang-format on
 
 namespace Weather {
@@ -16,13 +17,22 @@ public:
     int m;
     int l;
   };
+  struct PositionCelsius {
+    float offsetXForOneDigit;
+    float offsetXForTwoDigit;
+    float offsetXForThreeDigit;
+    float offsetY;
+  };
   UI(const City cities[], const unsigned short numberCities,
      const char *pathAtlas, const char *pathFontBold,
-     const char *pathFontRegular, const char *pathFontBig, const char *pathCelsius);
+     const char *pathFontRegular, const char *pathFontBig,
+     const char *pathCelsius);
   ~UI();
   void DropdownMenu(const int screenWidthSize);
   int GetActiveItemDropdownMenu();
   void WeatherHeroCard(const std::map<std::string, std::string> &data);
+  void
+  WeatherHourlyCard(const std::list<std::map<std::string, std::string>> &data);
 
 private:
   std::map<const char *, int> dropdownMenuState;
@@ -31,5 +41,8 @@ private:
   Texture2D celsius;
   std::map<std::string, Font> fonts;
   struct FontSize fontSize;
+  struct PositionCelsius positionCelsius;
+  void drawCelsius(const PositionCelsius &positionCelsius,
+                   const std::string &key);
 };
 } // namespace Weather

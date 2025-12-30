@@ -49,15 +49,31 @@ void UI::DropdownMenu(const int screenWidth) {
 
 int UI::GetActiveItemDropdownMenu() { return dropdownMenuState["item"]; }
 
+void UI::drawCelsius(const PositionCelsius &positionCelsius,
+                     const std::string &key) {
+  float posX = positionCelsius.offsetXForOneDigit;
+  if (key.length() == 2) {
+    posX = positionCelsius.offsetXForTwoDigit;
+  } else if (key.length() == 3) {
+    posX = positionCelsius.offsetXForThreeDigit;
+  }
+
+  DrawTexturePro(
+      celsius,
+      (Rectangle){0.0f, 0.0f, (float)celsius.width, (float)celsius.height},
+      (Rectangle){posX, positionCelsius.offsetY, (float)celsius.width,
+                  (float)celsius.height},
+      (Vector2){0.0f, 0.0f}, 0.0f, WHITE);
+}
+
 void UI::WeatherHeroCard(const std::map<std::string, std::string> &data) {
   int idx = 0;
   std::string pic = data.at("pic");
   for (int i = 0; i < ATLAS_ATLAS_SPRITE_COUNT; ++i) {
-    if (rtpDescAtlas[i].nameId == pic && i > 0) {
+    if (rtpDescAtlas[i].nameId == pic) {
       idx = i;
       break;
     }
-    continue;
   }
   DrawTexturePro(
       atlas,
@@ -80,18 +96,30 @@ void UI::WeatherHeroCard(const std::map<std::string, std::string> &data) {
   DrawTextEx(fonts.at("big"), data.at("temp").c_str(), (Vector2){25.0f, 170.0f},
              fontSize.l, 2, GetColor(palette.light));
 
-  float posX = 95.0f;
-  if (data.at("temp").length() == 1) {
-    posX = 50.0f;
-  } else if (data.at("temp").length() == 2) {
-    posX = 73.0f;
-  }
+  PositionCelsius pc = {50.0f, 70.0f, 95.0f, 180.0f};
+  drawCelsius(pc, data.at("temp"));
+}
 
-  DrawTexturePro(
-      celsius,
-      (Rectangle){0.0f, 0.0f, (float)celsius.width, (float)celsius.height},
-      (Rectangle){posX, 180.0f, (float)celsius.width, (float)celsius.height},
-      (Vector2){0.0f, 0.0f}, 0.0f, WHITE);
+void UI::WeatherHourlyCard(
+    const std::list<std::map<std::string, std::string>> &data) {
+  float posX = 30.0f;
+  float step = 1.0f;
+  float inc = 4.0f;
+  PositionCelsius pc = {55.0f, 80.0f, 100.0f, 530.0f};
+
+  for (const auto item : data) {
+    DrawTextEx(fonts.at("regular"), item.at("time").c_str(),
+               (Vector2){posX * step, 490.0f}, fontSize.s, 2,
+               GetColor(palette.light));
+    DrawTextEx(fonts.at("big"), item.at("temp").c_str(),
+               (Vector2){posX * step, 520.0f}, fontSize.l, 2,
+               GetColor(palette.light));
+    drawCelsius(pc, item.at("temp"));
+    pc.offsetXForThreeDigit += posX * inc;
+    pc.offsetXForOneDigit += posX * inc;
+    pc.offsetXForTwoDigit += posX * inc;
+    step += inc;
+  }
 }
 
 UI::~UI() {
@@ -101,5 +129,4 @@ UI::~UI() {
     UnloadFont(item.second);
   }
 }
-
 } // namespace Weather
