@@ -33,6 +33,8 @@ public:
   void WeatherHeroCard(const std::map<std::string, std::string> &data);
   void
   WeatherHourlyCard(const std::list<std::map<std::string, std::string>> &data);
+  void WeatherPredictionsCard(
+      const std::list<std::map<std::string, std::string>> &data);
 
 private:
   std::map<const char *, int> dropdownMenuState;

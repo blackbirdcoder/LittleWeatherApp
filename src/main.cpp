@@ -29,18 +29,23 @@ int main(void) {
   client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
 
   std::map<std::string, std::string> dataHeroCard = {
-      {"pic", "day_snow"},
-      {"weather", "Snow"},
+      {"pic", "day_overcast"},
+      {"weather", "Overcast"},
       {"city", "Kharkiv City"},
-      {"temp", "-1"},
+      {"temp", "-10"},
   };
 
   std::list<std::map<std::string, std::string>> dataHourlyCard = {
-      {{"time", "3PM"}, {"temp", "-1"}},
-      {{"time", "4PM"}, {"temp", "-1"}},
-      {{"time", "5PM"}, {"temp", "-3"}},
-      {{"time", "6PM"}, {"temp", "-5"}},
-      {{"time", "7PM"}, {"temp", "-7"}},
+      {{"time", "3PM"}, {"temp", "1"}}, {{"time", "4PM"}, {"temp", "-3"}},
+      {{"time", "5PM"}, {"temp", "3"}}, {{"time", "6PM"}, {"temp", "-4"}},
+      {{"time", "7PM"}, {"temp", "-2"}},
+  };
+
+  std::list<std::map<std::string, std::string>> dataPredictions = {
+      {{"pic", "mini_cloud"}, {"title", "Cloud"}, {"result", "100%"}},
+      {{"pic", "mini_visibility"}, {"title", "Visibility"}, {"result", "100%"}},
+      {{"pic", "mini_water"}, {"title", "Humidity"}, {"result", "1%"}},
+      {{"pic", "mini_windy"}, {"title", "Wind speed"}, {"result", "110km/h"}},
   };
 
   while (!WindowShouldClose()) {
@@ -55,6 +60,7 @@ int main(void) {
     }
     ui.WeatherHeroCard(dataHeroCard);
     ui.WeatherHourlyCard(dataHourlyCard);
+    ui.WeatherPredictionsCard(dataPredictions);
     //---
     EndDrawing();
   }

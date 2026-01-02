@@ -10,7 +10,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 #define ATLAS_ATLAS_IMAGE_PATH "atlas.png"
-#define ATLAS_ATLAS_SPRITE_COUNT 20
+#define ATLAS_ATLAS_SPRITE_COUNT 23
 
 // Atlas sprite properties
 typedef struct rtpAtlasSprite {
@@ -27,7 +27,7 @@ typedef struct rtpAtlasSprite {
 } rtpAtlasSprite;
 
 // Atlas sprites array
-static rtpAtlasSprite rtpDescAtlas[20] = {
+static rtpAtlasSprite rtpDescAtlas[23] = {
     {"day_clear", "", 0, 0, 401, 1, 97, 97, 1, false, 0, 0, 97, 97, 0, 0, 0, 0,
      0},
     {"day_cloudy", "", 0, 0, 601, 106, 97, 62, 1, false, 0, 0, 97, 62, 0, 0, 0,
@@ -38,17 +38,25 @@ static rtpAtlasSprite rtpDescAtlas[20] = {
      0, 0, 0},
     {"day_little_rain", "", 0, 0, 301, 1, 97, 98, 1, false, 0, 0, 97, 98, 0, 0,
      0, 0, 0},
-    {"day_overcast", "", 0, 0, 901, 106, 97, 52, 1, false, 0, 0, 97, 52, 0, 0,
+    {"day_overcast", "", 0, 0, 701, 106, 97, 52, 1, false, 0, 0, 97, 52, 0, 0,
      0, 0, 0},
-    {"day_partly_cloudy", "", 0, 0, 501, 106, 97, 65, 1, false, 0, 0, 97, 65, 0,
+    {"day_partly_cloudy", "", 0, 0, 401, 106, 97, 65, 1, false, 0, 0, 97, 65, 0,
      0, 0, 0, 0},
     {"day_snow", "", 0, 0, 866, 1, 97, 89, 1, false, 0, 0, 97, 89, 0, 0, 0, 0,
      0},
     {"day_storm", "", 0, 0, 1, 1, 97, 102, 1, false, 0, 0, 97, 102, 0, 0, 0, 0,
      0},
+    {"mini_cloud", "", 0, 0, 986, 106, 32, 17, 1, false, 0, 0, 32, 17, 0, 0, 0,
+     0, 0},
+    {"mini_visibility", "", 0, 0, 959, 106, 24, 18, 1, false, 0, 0, 24, 18, 0,
+     0, 0, 0, 0},
+    {"mini_water", "", 0, 0, 901, 106, 20, 32, 1, false, 0, 0, 20, 32, 0, 0, 0,
+     0, 0},
+    {"mini_windy", "", 0, 0, 924, 106, 32, 26, 1, false, 0, 0, 32, 26, 0, 0, 0,
+     0, 0},
     {"night_clear", "", 0, 0, 501, 1, 97, 97, 1, false, 0, 0, 97, 97, 0, 0, 0,
      0, 0},
-    {"night_cloudy", "", 0, 0, 701, 106, 97, 62, 1, false, 0, 0, 97, 62, 0, 0,
+    {"night_cloudy", "", 0, 0, 501, 106, 97, 62, 1, false, 0, 0, 97, 62, 0, 0,
      0, 0, 0},
     {"night_heavy_rain", "", 0, 0, 201, 106, 97, 84, 1, false, 0, 0, 97, 84, 0,
      0, 0, 0, 0},
@@ -65,6 +73,4 @@ static rtpAtlasSprite rtpDescAtlas[20] = {
     {"night_storm", "", 0, 0, 101, 1, 97, 102, 1, false, 0, 0, 97, 102, 0, 0, 0,
      0, 0},
     {"water", "", 0, 0, 601, 1, 62, 97, 1, false, 0, 0, 62, 97, 0, 0, 0, 0, 0},
-    {"windy", "", 0, 0, 401, 106, 97, 79, 1, false, 0, 0, 97, 79, 0, 0, 0, 0,
-     0},
 };

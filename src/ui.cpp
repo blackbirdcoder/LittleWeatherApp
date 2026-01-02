@@ -2,6 +2,7 @@
 #include "settings.h"
 // temporarily
 #include <iostream>
+#include <raylib.h>
 //---
 
 namespace Weather {
@@ -118,6 +119,43 @@ void UI::WeatherHourlyCard(
     pc.offsetXForThreeDigit += posX * inc;
     pc.offsetXForOneDigit += posX * inc;
     pc.offsetXForTwoDigit += posX * inc;
+    step += inc;
+  }
+}
+
+void UI::WeatherPredictionsCard(
+    const std::list<std::map<std::string, std::string>> &data) {
+  float step = 1.0f;
+  float inc = 4.0f;
+  for (const auto item : data) {
+    int idx = 0;
+    std::string pic = item.at("pic");
+    for (int i = 0; i < ATLAS_ATLAS_SPRITE_COUNT; ++i) {
+      if (rtpDescAtlas[i].nameId == pic) {
+        idx = i;
+        break;
+      }
+    }
+    Rectangle src = {
+        (float)rtpDescAtlas[idx].positionX + (float)rtpDescAtlas[idx].padding,
+        (float)rtpDescAtlas[idx].positionY + (float)rtpDescAtlas[idx].padding,
+        (float)rtpDescAtlas[idx].sourceWidth,
+        (float)rtpDescAtlas[idx].sourceHeight};
+
+    Rectangle dst = {Window::WIDTH - 170.0f, 20.0f * step,
+                     (float)rtpDescAtlas[idx].sourceWidth,
+                     (float)rtpDescAtlas[idx].sourceHeight};
+
+    Vector2 orig = {(float)rtpDescAtlas[idx].originX,
+                    (float)rtpDescAtlas[idx].originY};
+
+    DrawTexturePro(atlas, src, dst, orig, 0.0f, WHITE);
+    DrawTextEx(fonts.at("regular"), item.at("title").c_str(),
+               (Vector2){Window::WIDTH - 130.0f, 20.0f * step}, fontSize.s, 2,
+               GetColor(palette.light));
+    DrawTextEx(fonts.at("bold"), item.at("result").c_str(),
+               (Vector2){Window::WIDTH - 130.0f, 20.0f * step + 25.0f},
+               fontSize.m, 2, GetColor(palette.light));
     step += inc;
   }
 }
