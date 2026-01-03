@@ -36,8 +36,8 @@ int main(void) {
   };
 
   std::list<std::map<std::string, std::string>> dataHourlyCard = {
-      {{"time", "3PM"}, {"temp", "1"}}, {{"time", "4PM"}, {"temp", "-3"}},
-      {{"time", "5PM"}, {"temp", "3"}}, {{"time", "6PM"}, {"temp", "-4"}},
+      {{"time", "3PM"}, {"temp", "1"}},  {{"time", "4PM"}, {"temp", "-3"}},
+      {{"time", "5PM"}, {"temp", "3"}},  {{"time", "6PM"}, {"temp", "-4"}},
       {{"time", "7PM"}, {"temp", "-2"}},
   };
 
@@ -58,6 +58,7 @@ int main(void) {
       activeItem = ui.GetActiveItemDropdownMenu();
       client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
     }
+    ui.ShowDayOfWeek();
     ui.WeatherHeroCard(dataHeroCard);
     ui.WeatherHourlyCard(dataHourlyCard);
     ui.WeatherPredictionsCard(dataPredictions);

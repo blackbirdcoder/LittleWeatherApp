@@ -1,5 +1,6 @@
 #pragma once
 // clang-format off
+#include <bits/types/time_t.h>
 #include <raylib.h>
 #include <raygui.h>
 #include <map>
@@ -7,6 +8,7 @@
 #include "settings.h"
 #include "atlas.h"
 #include <list>
+#include <ctime>
 // clang-format on
 
 namespace Weather {
@@ -35,6 +37,7 @@ public:
   WeatherHourlyCard(const std::list<std::map<std::string, std::string>> &data);
   void WeatherPredictionsCard(
       const std::list<std::map<std::string, std::string>> &data);
+  void ShowDayOfWeek();
 
 private:
   std::map<const char *, int> dropdownMenuState;
@@ -44,6 +47,7 @@ private:
   std::map<std::string, Font> fonts;
   struct FontSize fontSize;
   struct PositionCelsius positionCelsius;
+  std::time_t timeNow;
   void drawCelsius(const PositionCelsius &positionCelsius,
                    const std::string &key);
 };

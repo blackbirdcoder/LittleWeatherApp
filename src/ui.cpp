@@ -19,6 +19,7 @@ UI::UI(const City cities[], const unsigned short numberCities,
   fonts["big"] = LoadFontEx(pathFontBig, fontSize.l, 0, 0);
   dropdownMenuState["item"] = 0;
   dropdownMenuState["show"] = 1;
+  timeNow = std::time(nullptr);
 
   for (int i = 0; i < numberCities; ++i) {
     if (i < numberCities - 1) {
@@ -158,6 +159,13 @@ void UI::WeatherPredictionsCard(
                fontSize.m, 2, GetColor(palette.light));
     step += inc;
   }
+}
+
+void UI::ShowDayOfWeek() {
+  char day[10];
+  std::strftime(day, sizeof(day), "%A", std::localtime(&timeNow));
+  DrawTextEx(fonts.at("bold"), day, (Vector2){25.0f, 440.0f}, fontSize.m, 2,
+             GetColor(palette.light));
 }
 
 UI::~UI() {
