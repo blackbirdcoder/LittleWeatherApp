@@ -14,6 +14,7 @@
 namespace Weather {
 class UI {
 public:
+  bool isRefresh;
   struct FontSize {
     int s;
     int m;
@@ -38,6 +39,7 @@ public:
   void WeatherPredictionsCard(
       const std::list<std::map<std::string, std::string>> &data);
   void ShowDayOfWeek();
+  void ButtonRefresh(const int screenWidthSize, const int screenWHightSize);
 
 private:
   std::map<const char *, int> dropdownMenuState;

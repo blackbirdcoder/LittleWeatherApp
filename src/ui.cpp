@@ -20,6 +20,7 @@ UI::UI(const City cities[], const unsigned short numberCities,
   dropdownMenuState["item"] = 0;
   dropdownMenuState["show"] = 1;
   timeNow = std::time(nullptr);
+  isRefresh = false;
 
   for (int i = 0; i < numberCities; ++i) {
     if (i < numberCities - 1) {
@@ -166,6 +167,20 @@ void UI::ShowDayOfWeek() {
   std::strftime(day, sizeof(day), "%A", std::localtime(&timeNow));
   DrawTextEx(fonts.at("bold"), day, (Vector2){25.0f, 440.0f}, fontSize.m, 2,
              GetColor(palette.light));
+}
+
+void UI::ButtonRefresh(const int screenWidthSize, const int screenWHightSize) {
+  float width = 125.0f;
+  float height = 30.0f;
+  Rectangle pos = {
+      (float)screenWidthSize - width - 20.0f,
+      (float)screenWHightSize - height - 43.0f,
+      width,
+      height,
+  };
+  if (GuiButton(pos, "Refresh")) {
+    isRefresh = true;
+  }
 }
 
 UI::~UI() {

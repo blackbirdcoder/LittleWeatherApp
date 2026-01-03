@@ -62,6 +62,12 @@ int main(void) {
     ui.WeatherHeroCard(dataHeroCard);
     ui.WeatherHourlyCard(dataHourlyCard);
     ui.WeatherPredictionsCard(dataPredictions);
+    ui.ButtonRefresh(Weather::Window::WIDTH, Weather::Window::HEIGHT);
+    if (ui.isRefresh) {
+      client.Request(Weather::REQUEST_PATH, Weather::CITIES,
+                     ui.GetActiveItemDropdownMenu());
+      ui.isRefresh = false;
+    }
     //---
     EndDrawing();
   }
