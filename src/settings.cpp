@@ -9,7 +9,7 @@ const char *TITLE = "Weather";
 const int FPS = 60;
 } // namespace Window
 
-const unsigned short NUMBER_CITIES = 2;
+const unsigned short NUMBER_CITIES = 3;
 
 const Palette palette = {
     0x00303BFF,
@@ -32,13 +32,21 @@ const City kyiv = {
     30.5238,
 };
 
-const City CITIES[NUMBER_CITIES] = {kharkiv, kyiv};
+const City miami = {
+    2,
+    "Miami",
+    25.75048,
+    -80.20894,
+};
+
+const City CITIES[NUMBER_CITIES] = {kharkiv, kyiv, miami};
 
 const char *HOST = "api.open-meteo.com";
 const std::map<Token, std::string> REQUEST_PATH = {
     {PART_ONE, "/v1/forecast?latitude="},
     {PART_TWO, "&longitude="},
-    {PART_THREE, "&hourly=temperature_2m,rain,cloud_cover,snowfall,"
-                 "precipitation,wind_speed_10m,wind_direction_10m,"
-                 "relativehumidity_2m,is_day&forecast_days=1&format=json"}};
+    {PART_THREE,
+     "&hourly=temperature_2m,rain,cloud_cover,snowfall,weather_code,"
+     "precipitation,wind_speed_10m,wind_direction_10m,"
+     "relativehumidity_2m,is_day&forecast_days=1&format=json"}};
 } // namespace Weather

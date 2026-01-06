@@ -29,7 +29,7 @@ struct City {
   double longitude;
 };
 
-enum Cities { KHARKOV, KYIV };
+enum Cities { KHARKOV, KYIV, MIAMI };
 enum Token { PART_ONE, PART_TWO, PART_THREE };
 
 extern const City CITIES[];

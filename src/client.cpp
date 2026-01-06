@@ -8,8 +8,13 @@ namespace Weather {
 
 Client::Client(const char *host) { this->host = host; };
 
-int Client::Request(const std::map<Token, std::string> path,
-                    const City cities[], int menuCurrentItem) {
+std::map<std::string, std::string>
+Client::Request(const std::map<Token, std::string> &path, const City cities[],
+                int menuCurrentItem) {
+  std::map<std::string, std::string> answer = {
+      {"status", ""},
+      {"body", ""},
+  };
   httplib::Client cli(host);
 
   std::stringstream strBuild;
@@ -19,12 +24,11 @@ int Client::Request(const std::map<Token, std::string> path,
   query = strBuild.str();
 
   if (auto res = cli.Get(query)) {
-    std::cout << "[*]RESULT:" << std::endl;
-    std::cout << res->status << std::endl;
-    std::cout << res->body << std::endl;
-    return res->status;
+    answer.at("status") = std::to_string(res->status);
+    answer.at("body") = res->body;
   }
-  return -1;
+
+  return answer;
 };
 
-} // namespace WeatherApp
+} // namespace Weather

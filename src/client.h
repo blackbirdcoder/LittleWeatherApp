@@ -8,7 +8,7 @@ namespace Weather {
 class Client {
 public:
   Client(const char *host);
-  int Request( std::map<Token, std::string> path,
+  std::map<std::string, std::string> Request(const std::map<Token, std::string> &path,
     const City cities[], int menuCurrentItem);
 
 private:

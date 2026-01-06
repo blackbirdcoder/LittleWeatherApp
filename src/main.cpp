@@ -6,9 +6,10 @@
 #include "ui.h"
 #include "httplib.h"
 #include "client.h"
+#include <map>
+#include "parser.h"
 //temporarily
 #include <iostream>
-#include <map>
 #include <list>
 //---
 // clang-format on
@@ -26,14 +27,18 @@ int main(void) {
                  "assets/Roboto_Big.ttf", "assets/celsius.png");
   int activeItem = ui.GetActiveItemDropdownMenu();
   Weather::Client client(Weather::HOST);
-  client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
+  std::map<std::string, std::string> response =
+      client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
+  Weather::Parser parser;
+  parser.Parse(response.at("body"), Weather::CITIES,
+               ui.GetActiveItemDropdownMenu());
 
-  std::map<std::string, std::string> dataHeroCard = {
-      {"pic", "day_overcast"},
-      {"weather", "Overcast"},
-      {"city", "Kharkiv City"},
-      {"temp", "-10"},
-  };
+  // std::map<std::string, std::string> dataHeroCard = {
+  //     {"pic", "day_overcast"},
+  //     {"weather", "Overcast"},
+  //     {"city", "Kharkiv City"},
+  //     {"temp", "-10"},
+  // };
 
   std::list<std::map<std::string, std::string>> dataHourlyCard = {
       {{"time", "3PM"}, {"temp", "1"}},  {{"time", "4PM"}, {"temp", "-3"}},
@@ -52,20 +57,25 @@ int main(void) {
     BeginDrawing();
     ClearBackground(GetColor(Weather::palette.dark));
     wallpaper.Draw();
-    //--- GIU
+    //--- GUI
     ui.DropdownMenu(Weather::Window::WIDTH);
     if (activeItem != ui.GetActiveItemDropdownMenu()) {
       activeItem = ui.GetActiveItemDropdownMenu();
-      client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
+      response =
+          client.Request(Weather::REQUEST_PATH, Weather::CITIES, activeItem);
+      parser.Parse(response.at("body"), Weather::CITIES,
+                   ui.GetActiveItemDropdownMenu());
     }
     ui.ShowDayOfWeek();
-    ui.WeatherHeroCard(dataHeroCard);
+    ui.WeatherHeroCard(parser.GetDataHero());
     ui.WeatherHourlyCard(dataHourlyCard);
     ui.WeatherPredictionsCard(dataPredictions);
     ui.ButtonRefresh(Weather::Window::WIDTH, Weather::Window::HEIGHT);
     if (ui.isRefresh) {
-      client.Request(Weather::REQUEST_PATH, Weather::CITIES,
-                     ui.GetActiveItemDropdownMenu());
+      response = client.Request(Weather::REQUEST_PATH, Weather::CITIES,
+                                ui.GetActiveItemDropdownMenu());
+      parser.Parse(response.at("body"), Weather::CITIES,
+                   ui.GetActiveItemDropdownMenu());
       ui.isRefresh = false;
     }
     //---
