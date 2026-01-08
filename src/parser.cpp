@@ -1,6 +1,7 @@
 #include "parser.h"
 #include <cmath>
 // temporarily
+#include <ctime>
 #include <iostream>
 #include <string>
 
@@ -9,9 +10,13 @@ Parser::Parser() { timeNow = std::time(nullptr); };
 
 void Parser::Parse(std::string &rowData, const City cities[],
                    int itemCityActive) {
-  std::tm *local = std::localtime(&timeNow);
-  int hourlyIdx = local->tm_hour;
+
   nlohmann::json data = nlohmann::json::parse(rowData);
+
+  int offset = data["utc_offset_seconds"];
+  std::tm *gmt = std::gmtime(&timeNow);
+  int hourlyIdx = (gmt->tm_hour + offset / 3600) % 24;
+  timeCity = timeNow + offset;
 
   // Data Hero Card
   dataHero["city"] = cities[itemCityActive].name + " City";
@@ -69,8 +74,18 @@ void Parser::Parse(std::string &rowData, const City cities[],
     dataHero["weather"] = "To be confirmed";
   }
   //---
+  // Data hourly
+  // TODO: Continue data hourly implementation
+  std::cout << rowData << '\n';
+
+  //---
 }
+
 const std::map<std::string, std::string> &Parser::GetDataHero() const {
   return dataHero;
+}
+
+const time_t &Parser::GetTimeCity() const {
+  return timeCity;
 }
 } // namespace Weather

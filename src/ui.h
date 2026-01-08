@@ -38,7 +38,7 @@ public:
   WeatherHourlyCard(const std::list<std::map<std::string, std::string>> &data);
   void WeatherPredictionsCard(
       const std::list<std::map<std::string, std::string>> &data);
-  void ShowDayOfWeek();
+  void ShowDayOfWeek(time_t timeCity);
   void ButtonRefresh(const int screenWidthSize, const int screenWHightSize);
 
 private:
@@ -49,7 +49,6 @@ private:
   std::map<std::string, Font> fonts;
   struct FontSize fontSize;
   struct PositionCelsius positionCelsius;
-  std::time_t timeNow;
   void drawCelsius(const PositionCelsius &positionCelsius,
                    const std::string &key);
 };

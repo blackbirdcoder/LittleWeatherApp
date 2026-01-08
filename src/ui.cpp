@@ -1,6 +1,7 @@
 #include "ui.h"
 #include "settings.h"
 // temporarily
+#include <ctime>
 #include <iostream>
 #include <raylib.h>
 //---
@@ -19,7 +20,6 @@ UI::UI(const City cities[], const unsigned short numberCities,
   fonts["big"] = LoadFontEx(pathFontBig, fontSize.l, 0, 0);
   dropdownMenuState["item"] = 0;
   dropdownMenuState["show"] = 1;
-  timeNow = std::time(nullptr);
   isRefresh = false;
 
   for (int i = 0; i < numberCities; ++i) {
@@ -162,9 +162,9 @@ void UI::WeatherPredictionsCard(
   }
 }
 
-void UI::ShowDayOfWeek() {
+void UI::ShowDayOfWeek(time_t timeCity) {
   char day[10];
-  std::strftime(day, sizeof(day), "%A", std::localtime(&timeNow));
+  std::strftime(day, sizeof(day), "%A", std::gmtime(&timeCity));
   DrawTextEx(fonts.at("bold"), day, (Vector2){25.0f, 440.0f}, fontSize.m, 2,
              GetColor(palette.light));
 }

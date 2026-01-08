@@ -66,7 +66,7 @@ int main(void) {
       parser.Parse(response.at("body"), Weather::CITIES,
                    ui.GetActiveItemDropdownMenu());
     }
-    ui.ShowDayOfWeek();
+    ui.ShowDayOfWeek(parser.GetTimeCity());
     ui.WeatherHeroCard(parser.GetDataHero());
     ui.WeatherHourlyCard(dataHourlyCard);
     ui.WeatherPredictionsCard(dataPredictions);

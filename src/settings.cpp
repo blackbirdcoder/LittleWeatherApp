@@ -48,5 +48,5 @@ const std::map<Token, std::string> REQUEST_PATH = {
     {PART_THREE,
      "&hourly=temperature_2m,rain,cloud_cover,snowfall,weather_code,"
      "precipitation,wind_speed_10m,wind_direction_10m,"
-     "relativehumidity_2m,is_day&forecast_days=1&format=json"}};
+     "relativehumidity_2m,is_day&timezone=auto&forecast_days=1&format=json"}};
 } // namespace Weather
