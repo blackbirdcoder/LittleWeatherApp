@@ -8,6 +8,7 @@
 #include "client.h"
 #include <map>
 #include "parser.h"
+#include <vector>
 //temporarily
 #include <iostream>
 #include <list>
@@ -40,7 +41,7 @@ int main(void) {
   //     {"temp", "-10"},
   // };
 
-  std::list<std::map<std::string, std::string>> dataHourlyCard = {
+  std::vector<std::map<std::string, std::string>> dataHourlyCard = {
       {{"time", "3PM"}, {"temp", "1"}},  {{"time", "4PM"}, {"temp", "-3"}},
       {{"time", "5PM"}, {"temp", "3"}},  {{"time", "6PM"}, {"temp", "-4"}},
       {{"time", "7PM"}, {"temp", "-2"}},
@@ -68,7 +69,7 @@ int main(void) {
     }
     ui.ShowDayOfWeek(parser.GetTimeCity());
     ui.WeatherHeroCard(parser.GetDataHero());
-    ui.WeatherHourlyCard(dataHourlyCard);
+    ui.WeatherHourlyCard(parser.GetDataHourly());
     ui.WeatherPredictionsCard(dataPredictions);
     ui.ButtonRefresh(Weather::Window::WIDTH, Weather::Window::HEIGHT);
     if (ui.isRefresh) {

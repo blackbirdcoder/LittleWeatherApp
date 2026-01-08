@@ -36,4 +36,5 @@ extern const City CITIES[];
 
 extern const char *HOST;
 extern const std::map<Token, std::string> REQUEST_PATH;
+extern const unsigned short NUMBER_CARDS;
 } // namespace Weather

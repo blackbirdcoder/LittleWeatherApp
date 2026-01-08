@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "settings.h"
 #include <cmath>
 // temporarily
 #include <ctime>
@@ -6,7 +7,10 @@
 #include <string>
 
 namespace Weather {
-Parser::Parser() { timeNow = std::time(nullptr); };
+Parser::Parser() {
+  timeNow = std::time(nullptr);
+  dataHourly.resize(NUMBER_CARDS);
+};
 
 void Parser::Parse(std::string &rowData, const City cities[],
                    int itemCityActive) {
@@ -75,9 +79,27 @@ void Parser::Parse(std::string &rowData, const City cities[],
   }
   //---
   // Data hourly
-  // TODO: Continue data hourly implementation
-  std::cout << rowData << '\n';
-
+  int futureIdx = hourlyIdx;
+  int overflowIdx = 0;
+  int limit = NUMBER_CARDS;
+  for (int i = 0; i < limit; ++i) {
+    if ((futureIdx += 1) > 23) {
+      if (overflowIdx < limit) {
+        float temp = data["hourly"]["temperature_2m"][overflowIdx];
+        dataHourly[i] = {
+            {"time",
+             std::to_string(futureIdx == 24 ? 12 : futureIdx % 12) + "AM"},
+            {"temp", std::to_string((int)std::round(temp))}};
+        ++overflowIdx;
+      }
+    } else {
+      float temp = data["hourly"]["temperature_2m"][futureIdx];
+      dataHourly[i] = {
+          {"time", std::to_string(futureIdx == 12 ? 12 : futureIdx % 12) +
+                       (futureIdx >= 12 ? "PM" : "AM")},
+          {"temp", std::to_string((int)std::round(temp))}};
+    }
+  }
   //---
 }
 
@@ -85,7 +107,10 @@ const std::map<std::string, std::string> &Parser::GetDataHero() const {
   return dataHero;
 }
 
-const time_t &Parser::GetTimeCity() const {
-  return timeCity;
+const time_t &Parser::GetTimeCity() const { return timeCity; }
+
+const std::vector<std::map<std::string, std::string>> &
+Parser::GetDataHourly() const {
+  return dataHourly;
 }
 } // namespace Weather

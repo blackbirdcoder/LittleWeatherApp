@@ -104,7 +104,7 @@ void UI::WeatherHeroCard(const std::map<std::string, std::string> &data) {
 }
 
 void UI::WeatherHourlyCard(
-    const std::list<std::map<std::string, std::string>> &data) {
+    const std::vector<std::map<std::string, std::string>> &data) {
   float posX = 30.0f;
   float step = 1.0f;
   float inc = 4.0f;

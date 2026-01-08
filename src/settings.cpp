@@ -10,6 +10,7 @@ const int FPS = 60;
 } // namespace Window
 
 const unsigned short NUMBER_CITIES = 3;
+const unsigned short NUMBER_CARDS = 5;
 
 const Palette palette = {
     0x00303BFF,

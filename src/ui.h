@@ -9,6 +9,7 @@
 #include "atlas.h"
 #include <list>
 #include <ctime>
+#include <vector>
 // clang-format on
 
 namespace Weather {
@@ -35,7 +36,7 @@ public:
   int GetActiveItemDropdownMenu();
   void WeatherHeroCard(const std::map<std::string, std::string> &data);
   void
-  WeatherHourlyCard(const std::list<std::map<std::string, std::string>> &data);
+  WeatherHourlyCard(const std::vector<std::map<std::string, std::string>> &data);
   void WeatherPredictionsCard(
       const std::list<std::map<std::string, std::string>> &data);
   void ShowDayOfWeek(time_t timeCity);
