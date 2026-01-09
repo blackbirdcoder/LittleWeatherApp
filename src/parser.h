@@ -15,12 +15,13 @@ public:
   const std::map<std::string, std::string> &GetDataHero() const;
   const std::time_t &GetTimeCity() const;
   const std::vector<std::map<std::string, std::string>> &GetDataHourly() const;
+  const std::vector<std::map<std::string, std::string>> &GetDataPrediction() const;
 
 private:
   std::time_t timeNow;
   std::time_t timeCity;
   std::map<std::string, std::string> dataHero;
   std::vector<std::map<std::string, std::string>> dataHourly;
-  // TODO: Continue. Data Predictions implementation
+  std::vector<std::map<std::string, std::string>> dataPrediction;
 };
 } // namespace Weather

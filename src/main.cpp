@@ -47,12 +47,12 @@ int main(void) {
   //     {{"time", "7PM"}, {"temp", "-2"}},
   // };
 
-  std::list<std::map<std::string, std::string>> dataPredictions = {
-      {{"pic", "mini_cloud"}, {"title", "Cloud"}, {"result", "100%"}},
-      {{"pic", "mini_visibility"}, {"title", "Visibility"}, {"result", "100%"}},
-      {{"pic", "mini_water"}, {"title", "Humidity"}, {"result", "1%"}},
-      {{"pic", "mini_windy"}, {"title", "Wind speed"}, {"result", "110km/h"}},
-  };
+  // std::vector<std::map<std::string, std::string>> dataPredictions = {
+  //     {{"pic", "mini_cloud"}, {"title", "Cloud"}, {"result", "100%"}},
+  //     {{"pic", "mini_visibility"}, {"title", "Visibility"}, {"result", "100%"}},
+  //     {{"pic", "mini_water"}, {"title", "Humidity"}, {"result", "1%"}},
+  //     {{"pic", "mini_windy"}, {"title", "Wind speed"}, {"result", "110km/h"}},
+  // };
 
   while (!WindowShouldClose()) {
     BeginDrawing();
@@ -70,7 +70,7 @@ int main(void) {
     ui.ShowDayOfWeek(parser.GetTimeCity());
     ui.WeatherHeroCard(parser.GetDataHero());
     ui.WeatherHourlyCard(parser.GetDataHourly());
-    ui.WeatherPredictionsCard(dataPredictions);
+    ui.WeatherPredictionsCard(parser.GetDataPrediction());
     ui.ButtonRefresh(Weather::Window::WIDTH, Weather::Window::HEIGHT);
     if (ui.isRefresh) {
       response = client.Request(Weather::REQUEST_PATH, Weather::CITIES,

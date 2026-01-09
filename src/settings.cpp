@@ -11,6 +11,7 @@ const int FPS = 60;
 
 const unsigned short NUMBER_CITIES = 3;
 const unsigned short NUMBER_CARDS = 5;
+const unsigned short NUMBER_POINTS = 4;
 
 const Palette palette = {
     0x00303BFF,
@@ -49,5 +50,5 @@ const std::map<Token, std::string> REQUEST_PATH = {
     {PART_THREE,
      "&hourly=temperature_2m,rain,cloud_cover,snowfall,weather_code,"
      "precipitation,wind_speed_10m,wind_direction_10m,"
-     "relativehumidity_2m,is_day&timezone=auto&forecast_days=1&format=json"}};
+     "relativehumidity_2m,visibility,is_day&timezone=auto&forecast_days=1&format=json"}};
 } // namespace Weather

@@ -12,6 +12,8 @@ extern const int FPS;
 } // namespace Window
 
 extern const unsigned short NUMBER_CITIES;
+extern const unsigned short NUMBER_CARDS;
+extern const unsigned short NUMBER_POINTS;
 
 struct Palette {
   unsigned int dark;
@@ -31,10 +33,10 @@ struct City {
 
 enum Cities { KHARKOV, KYIV, MIAMI };
 enum Token { PART_ONE, PART_TWO, PART_THREE };
+enum Prediction { CLOUD, VISIBILITY, HUMIDITY, WINDY };
 
 extern const City CITIES[];
 
 extern const char *HOST;
 extern const std::map<Token, std::string> REQUEST_PATH;
-extern const unsigned short NUMBER_CARDS;
 } // namespace Weather

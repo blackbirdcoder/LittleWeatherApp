@@ -38,7 +38,7 @@ public:
   void
   WeatherHourlyCard(const std::vector<std::map<std::string, std::string>> &data);
   void WeatherPredictionsCard(
-      const std::list<std::map<std::string, std::string>> &data);
+      const std::vector<std::map<std::string, std::string>> &data);
   void ShowDayOfWeek(time_t timeCity);
   void ButtonRefresh(const int screenWidthSize, const int screenWHightSize);
 

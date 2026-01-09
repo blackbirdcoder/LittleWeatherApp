@@ -126,7 +126,7 @@ void UI::WeatherHourlyCard(
 }
 
 void UI::WeatherPredictionsCard(
-    const std::list<std::map<std::string, std::string>> &data) {
+    const std::vector<std::map<std::string, std::string>> &data) {
   float step = 1.0f;
   float inc = 4.0f;
   for (const auto item : data) {

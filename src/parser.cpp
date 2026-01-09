@@ -1,4 +1,5 @@
 #include "parser.h"
+#include "json.hpp"
 #include "settings.h"
 #include <cmath>
 // temporarily
@@ -10,6 +11,7 @@ namespace Weather {
 Parser::Parser() {
   timeNow = std::time(nullptr);
   dataHourly.resize(NUMBER_CARDS);
+  dataPrediction.resize(NUMBER_POINTS);
 };
 
 void Parser::Parse(std::string &rowData, const City cities[],
@@ -101,6 +103,28 @@ void Parser::Parse(std::string &rowData, const City cities[],
     }
   }
   //---
+  // Data prediction
+  int cloud = data["hourly"]["cloud_cover"][hourlyIdx];
+  dataPrediction[CLOUD] = {{"pic", "mini_cloud"},
+                           {"title", "Cloud"},
+                           {"result", std::to_string(cloud) + "%"}};
+
+  double visionRaw = data["hourly"]["visibility"][hourlyIdx];
+  int visionProc = visionRaw > 20000.00 ? 100 : (visionRaw / 20000.00) * 100;
+  dataPrediction[VISIBILITY] = {{"pic", "mini_visibility"},
+                                {"title", "Visibility"},
+                                {"result", std::to_string(visionProc) + "%"}};
+
+  int humidity = data["hourly"]["relativehumidity_2m"][hourlyIdx];
+  dataPrediction[HUMIDITY] = {{"pic", "mini_water"},
+                              {"title", "Humidity"},
+                              {"result", std::to_string(humidity) + "%"}};
+                              
+  std::string windy = nlohmann::to_string(data["hourly"]["wind_speed_10m"][hourlyIdx]);
+  dataPrediction[WINDY] = {{"pic", "mini_windy"},
+                           {"title", "Wind speed"},
+                           {"result", windy + "km/h"}};
+  //---
 }
 
 const std::map<std::string, std::string> &Parser::GetDataHero() const {
@@ -112,5 +136,10 @@ const time_t &Parser::GetTimeCity() const { return timeCity; }
 const std::vector<std::map<std::string, std::string>> &
 Parser::GetDataHourly() const {
   return dataHourly;
+}
+
+const std::vector<std::map<std::string, std::string>> &
+Parser::GetDataPrediction() const {
+  return dataPrediction;
 }
 } // namespace Weather
