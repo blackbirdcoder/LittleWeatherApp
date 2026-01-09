@@ -21,5 +21,6 @@ private:
   std::time_t timeCity;
   std::map<std::string, std::string> dataHero;
   std::vector<std::map<std::string, std::string>> dataHourly;
+  // TODO: Continue. Data Predictions implementation
 };
 } // namespace Weather

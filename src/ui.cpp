@@ -99,7 +99,7 @@ void UI::WeatherHeroCard(const std::map<std::string, std::string> &data) {
   DrawTextEx(fonts.at("big"), data.at("temp").c_str(), (Vector2){25.0f, 170.0f},
              fontSize.l, 2, GetColor(palette.light));
 
-  PositionCelsius pc = {50.0f, 70.0f, 95.0f, 180.0f};
+  PositionCelsius pc = {50.0f, 73.0f, 95.0f, 180.0f};
   drawCelsius(pc, data.at("temp"));
 }
 
