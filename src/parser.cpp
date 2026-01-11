@@ -2,10 +2,6 @@
 #include "json.hpp"
 #include "settings.h"
 #include <cmath>
-// temporarily
-#include <ctime>
-#include <iostream>
-#include <string>
 
 namespace Weather {
 Parser::Parser() {

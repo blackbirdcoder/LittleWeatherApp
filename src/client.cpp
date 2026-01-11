@@ -2,10 +2,8 @@
 #include "settings.h"
 #include <iostream>
 #include <sstream>
-#include <string>
 
 namespace Weather {
-
 Client::Client(const char *host) { this->host = host; };
 
 std::map<std::string, std::string>

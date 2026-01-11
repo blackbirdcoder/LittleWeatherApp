@@ -1,10 +1,5 @@
 #include "ui.h"
 #include "settings.h"
-// temporarily
-#include <ctime>
-#include <iostream>
-#include <raylib.h>
-//---
 
 namespace Weather {
 

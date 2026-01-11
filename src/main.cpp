@@ -6,12 +6,7 @@
 #include "ui.h"
 #include "httplib.h"
 #include "client.h"
-#include <map>
 #include "parser.h"
-#include <vector>
-//temporarily
-#include <iostream>
-#include <list>
 //---
 // clang-format on
 
