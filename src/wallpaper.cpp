@@ -12,4 +12,6 @@ void Wallpaper::Set(int w_width, int w_height) {
 }
 
 void Wallpaper::Draw() { DrawTexture(image, 0, 0, WHITE); }
-} // namespace WeatherApp
+
+Wallpaper::~Wallpaper() { UnloadTexture(image); }
+} // namespace Weather

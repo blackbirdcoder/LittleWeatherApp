@@ -6,6 +6,7 @@ namespace Weather {
 class Wallpaper {
 public:
   Wallpaper(const char *fileName);
+  ~Wallpaper();
   void Set(int w_width, int w_height);
   void Draw();
 
