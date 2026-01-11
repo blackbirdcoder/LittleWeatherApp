@@ -10,3 +10,6 @@ Minimal viable weather app built with **C++** and **Raylib**.
 - 📍 Load cities from a config file
 - 🐞 Bug fixes
 - 🧪 Testing
+
+⚠️ The program is currently under development. 
+⚠️ Available cities: Kharkiv, Kyiv, Miami.
